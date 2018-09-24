@@ -15,3 +15,5 @@ bot.start((ctx) => {
 	console.log('Id пользователя:', ctx.from.id);
 	return ctx.reply('Добро пожаловать!');
 });
+
+bot.command('findmatch', (ctx) => ctx.reply('Three matches found'));
