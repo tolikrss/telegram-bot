@@ -17,21 +17,25 @@ bot.on('message', (msg) => {
 	const name = msg.from.first_name;
 	const kolianID = 466035983;
 	console.dir(msg);
-	if (
-		msg.from.id === kolianID && msg.text
-	) {
-		const resMsg = name + ', і шо дальше?';
-		bot.sendMessage(msg.chat.id, resMsg).then(() => {
-			// reply sent!
-		});
-	} else if (
-		msg.from.id === kolianID
-		&& !!msg.left_chat_member
-		&& msg.left_chat_member.id === kolianID
-	) {
-		const resMsg = name + ', ШО ОПЯТЬ?';
-		bot.sendMessage(msg.chat.id, resMsg);
-		// bot.getChat(msg.chat.id).
+	try {
+		if (
+			msg.from.id === kolianID && msg.text
+		) {
+			const resMsg = name + ', і шо дальше?';
+			bot.sendMessage(msg.chat.id, resMsg).then(() => {
+				// reply sent!
+			});
+		} else if (
+			msg.from.id === kolianID
+			&& !!msg.left_chat_member
+			&& msg.left_chat_member.id === kolianID
+		) {
+			const resMsg = name + ', ШО ОПЯТЬ?';
+			bot.sendMessage(msg.chat.id, resMsg);
+			// bot.getChat(msg.chat.id).
+		}
+	} catch (e) {
+		// console.error(3);
 	}
 });
 
