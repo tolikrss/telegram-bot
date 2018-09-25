@@ -14,20 +14,23 @@ else {
 console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
 
 bot.on('message', (msg) => {
+	console.dir(msg);
 	const name = msg.from.first_name;
 	const kolianID = 466035983;
 	const isMsgFromKolian = msg.from.id === kolianID;
 	const isCoubVideo = msg.text && msg.text.indexOf('coub') !== -1;
-	console.dir(msg);
+
 	try {
 		if (
 			isMsgFromKolian
 			&& msg.text
 		) {
 			const resMsg = name + ', і шо дальше?';
-			bot.sendMessage(msg.chat.id, resMsg).then(() => {
-				// reply sent!
-			});
+			bot
+				.sendMessage(msg.chat.id, resMsg)
+				.then(() => {
+					/* reply sent! */
+				});
 		}
 		if (
 			isMsgFromKolian
@@ -36,7 +39,11 @@ bot.on('message', (msg) => {
 		) {
 			const resMsg = name + ', ШО ОПЯТЬ?';
 			bot.sendMessage(msg.chat.id, resMsg);
-			// bot.getChat(msg.chat.id).
+			bot
+				.getChatMember(msg.chat.id, msg.from.id)
+				.then((chatMember) => {
+					bot.sendMessage(chatMember.user.id, 'Повернись, благаю );');
+				});
 		}
 		if (
 			isMsgFromKolian
@@ -46,7 +53,7 @@ bot.on('message', (msg) => {
 			bot.sendMessage(msg.chat.id, resMsg);
 		}
 	} catch (e) {
-		// console.error(3);
+		// console.error(e);
 	}
 });
 
