@@ -1,6 +1,7 @@
 const token = process.env.TOKEN;
 
 const Bot = require('node-telegram-bot-api');
+const fs = require('fs');
 let bot;
 
 if (process.env.NODE_ENV === 'production') {
@@ -13,12 +14,27 @@ else {
 
 console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
 
+const logMsgToFile = function (msg) {
+	try {
+		fs.writeFile('./log.txt', JSON.stringify(msg) + '\n', function (err) {
+			if (err) {
+				console.log(err);
+			}
+		});
+	} catch (err) {
+
+	}
+};
+
 bot.on('message', (msg) => {
 	console.dir(msg);
 	const name = msg.from.first_name;
 	const kolianID = 466035983;
 	const isMsgFromKolian = msg.from.id === kolianID;
 	const isCoubVideo = msg.text && msg.text.indexOf('coub') !== -1;
+	if (isMsgFromKolian) {
+		logMsgToFile(msg);
+	}
 
 	try {
 		if (
