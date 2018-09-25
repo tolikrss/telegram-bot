@@ -42,7 +42,7 @@ bot.on('message', (msg) => {
 			isMsgFromKolian
 			&& isCoubVideo
 		) {
-			const resMsg = ', знову х*йня якась :(';
+			const resMsg = name + ', знову х*йня якась :(';
 			bot.sendMessage(msg.chat.id, resMsg);
 		}
 	} catch (e) {
