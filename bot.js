@@ -42,7 +42,7 @@ bot.on('message', (msg) => {
 			bot
 				.getChatMember(msg.chat.id, msg.from.id)
 				.then((chatMember) => {
-					bot.sendMessage(chatMember.user.id, 'Повернись, благаю );');
+					// bot.sendMessage(chatMember.user.id, 'Повернись, благаю );');
 				});
 		}
 		if (
